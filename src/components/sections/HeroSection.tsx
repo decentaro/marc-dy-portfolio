@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface User {
   name: string;
@@ -39,16 +39,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ user }) => {
               className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
             >
               View My Work <ArrowRight className="inline-block ml-2" size={20} />
-            </a>
-            <a 
-              href="/assets/resume.pdf" 
-              download
-              className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all transform hover:scale-105"
-            >
-              <span className="flex items-center justify-center gap-2">
-                <Download size={20} />
-                Download Resume
-              </span>
             </a>
           </div>
         </div>
