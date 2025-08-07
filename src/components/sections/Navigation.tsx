@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
 interface NavigationProps {
@@ -29,9 +30,19 @@ const Navigation: React.FC<NavigationProps> = ({
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-cyan-400">
-              {userName}
-            </div>
+            <a 
+              href="#home"
+              onClick={() => setActiveSection('home')}
+              className="flex items-center hover:opacity-80 transition-opacity"
+            >
+              <Image
+                src="/icon.png"
+                alt="Marc Dy Logo"
+                width={56}
+                height={56}
+                className="rounded-lg"
+              />
+            </a>
           </div>
           
           {/* Desktop menu */}
