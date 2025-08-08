@@ -36,6 +36,14 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          {
+            key: 'X-Powered-By',
+            value: '',
+          },
+          {
+            key: 'Server',
+            value: '',
+          },
         ],
       },
     ];
