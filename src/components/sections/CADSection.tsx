@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 export interface CADProject {
   id: number;
@@ -28,6 +29,12 @@ const CADSection: React.FC<CADSectionProps> = ({
 }) => {
   // Find current project for lightbox navigation
   const currentProject = lightboxImage ? cadProjects.find(p => p.title === lightboxImage.title) : null;
+  
+  // Create intersection observers for each project
+  const observer1 = useIntersectionObserver({ threshold: 0.1, rootMargin: '100px', triggerOnce: true });
+  const observer2 = useIntersectionObserver({ threshold: 0.1, rootMargin: '100px', triggerOnce: true });
+  const observer3 = useIntersectionObserver({ threshold: 0.1, rootMargin: '100px', triggerOnce: true });
+  const observers = [observer1, observer2, observer3];
   
   const navigateLightboxImage = useCallback((direction: 'next' | 'prev') => {
     if (!currentProject || !lightboxImage) return;
@@ -77,8 +84,11 @@ const CADSection: React.FC<CADSectionProps> = ({
           </div>
 
           <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
-            {cadProjects.map((project) => (
-              <div key={project.id} className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/15 transition-all duration-300 group">
+            {cadProjects.map((project, index) => {
+              const { targetRef, shouldLoad } = observers[index];
+              
+              return (
+              <div key={project.id} ref={targetRef} className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/15 transition-all duration-300 group">
                 {/* Main CAD Image with Lightbox */}
                 <div className="relative h-48 bg-gradient-to-r from-gray-800 to-gray-700 overflow-hidden">
                   <div 
@@ -90,16 +100,27 @@ const CADSection: React.FC<CADSectionProps> = ({
                       projectId: project.id
                     })}
                   >
-                    <Image
-                      src={project.images[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0]}
-                      alt={project.title}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA"
-                    />
+                    {shouldLoad ? (
+                      <Image
+                        src={project.images[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0]}
+                        alt={project.title}
+                        width={400}
+                        height={300}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VLIAAAA"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={85}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-r from-gray-800 to-gray-700 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <div className="text-4xl mb-2">🎨</div>
+                          <p className="text-sm font-semibold">{project.title}</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   
                   {/* Hidden overlay for fallback */}
@@ -112,7 +133,7 @@ const CADSection: React.FC<CADSectionProps> = ({
                 </div>
 
                 {/* Image Thumbnails */}
-                {project.images.length > 1 && (
+                {project.images.length > 1 && shouldLoad && (
                   <div className="px-4 py-3 bg-gray-800/50">
                     <div className="flex gap-2 overflow-x-auto scrollbar-hide">
                       {project.images.map((image, index) => (
@@ -132,6 +153,8 @@ const CADSection: React.FC<CADSectionProps> = ({
                             height={48}
                             className="w-full h-full object-cover"
                             loading="lazy"
+                            sizes="64px"
+                            quality={75}
                           />
                         </button>
                       ))}
@@ -152,7 +175,8 @@ const CADSection: React.FC<CADSectionProps> = ({
                   </div>
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>
@@ -195,11 +219,13 @@ const CADSection: React.FC<CADSectionProps> = ({
             <Image
               src={lightboxImage.src}
               alt={`${lightboxImage.title} - Full size`}
-              width={1200}
-              height={800}
+              width={1920}
+              height={1440}
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
               onClick={() => setLightboxImage(null)}
               priority
+              sizes="(max-width: 768px) 100vw, 90vw"
+              quality={90}
             />
             
             {/* Navigation hint */}
