@@ -198,7 +198,6 @@ export default function Portfolio() {
         setActiveSection={setActiveSection}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        userName={user.name}
       />
 
       {/* Hero Section */}

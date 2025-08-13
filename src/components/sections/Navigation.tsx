@@ -7,15 +7,13 @@ interface NavigationProps {
   setActiveSection: (section: string) => void;
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
-  userName: string;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
   activeSection,
   setActiveSection,
   isMenuOpen,
-  setIsMenuOpen,
-  userName
+  setIsMenuOpen
 }) => {
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -36,11 +34,14 @@ const Navigation: React.FC<NavigationProps> = ({
               className="flex items-center hover:opacity-80 transition-opacity"
             >
               <Image
-                src="/icon.png"
+                src="/icon-optimized.png"
                 alt="Marc Dy Logo"
                 width={56}
                 height={56}
                 className="rounded-lg"
+                priority
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyKKhzQUKpyqANwCBGVFt6AtQJBTWCtEYHHKGWAKCZdHzJXy/wDqpqj/9k="
               />
             </a>
           </div>
