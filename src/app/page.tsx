@@ -131,9 +131,14 @@ const cadProjects: CADProject[] = [
     title: "Jetson Nano Case",
     description: "Custom 3D-designed protective case for NVIDIA Jetson Nano optimized for wearable computing applications",
     images: [
-      "/cad-designs/jetson_nano_1.png",
-      "/cad-designs/jetson_nano_2.png", 
-      "/cad-designs/jetson_nano_3.png"
+      "/cad-designs-optimized/jetson_nano_1.webp",
+      "/cad-designs-optimized/jetson_nano_2.webp", 
+      "/cad-designs-optimized/jetson_nano_3.webp"
+    ],
+    hdImages: [
+      "/cad-designs-hd/jetson_nano_1.webp",
+      "/cad-designs-hd/jetson_nano_2.webp", 
+      "/cad-designs-hd/jetson_nano_3.webp"
     ],
     category: "Hardware Design"
   },
@@ -142,10 +147,16 @@ const cadProjects: CADProject[] = [
     title: "Raspberry Pi Case",
     description: "Custom 3D-designed protective case for Raspberry Pi Compute Module and carrier PCB assembly optimized for wearable computing applications", 
     images: [
-      "/cad-designs/raspberry_pi_1.png",
-      "/cad-designs/raspberry_pi_2.png",
-      "/cad-designs/raspberry_pi_3.png",
-      "/cad-designs/raspberry_pi_4.png"
+      "/cad-designs-optimized/raspberry_pi_1.webp",
+      "/cad-designs-optimized/raspberry_pi_2.webp",
+      "/cad-designs-optimized/raspberry_pi_3.webp",
+      "/cad-designs-optimized/raspberry_pi_4.webp"
+    ],
+    hdImages: [
+      "/cad-designs-hd/raspberry_pi_1.webp",
+      "/cad-designs-hd/raspberry_pi_2.webp",
+      "/cad-designs-hd/raspberry_pi_3.webp",
+      "/cad-designs-hd/raspberry_pi_4.webp"
     ],
     category: "Hardware Design"
   },
@@ -154,10 +165,16 @@ const cadProjects: CADProject[] = [
     title: "Soldering Fume Extractor",
     description: "Custom 3D-designed fume extraction system with integrated blower fan to remove harmful solder smoke and improve workshop air quality during electronics work",
     images: [
-      "/cad-designs/extractor_1.png",
-      "/cad-designs/extractor_2.png",
-      "/cad-designs/extractor_3.png",
-      "/cad-designs/extractor_4.png",
+      "/cad-designs-optimized/extractor_1.webp",
+      "/cad-designs-optimized/extractor_2.webp",
+      "/cad-designs-optimized/extractor_3.webp",
+      "/cad-designs-optimized/extractor_4.webp",
+    ],
+    hdImages: [
+      "/cad-designs-hd/extractor_1.webp",
+      "/cad-designs-hd/extractor_2.webp",
+      "/cad-designs-hd/extractor_3.webp",
+      "/cad-designs-hd/extractor_4.webp",
     ],
     category: "Workshop Tools"
   }

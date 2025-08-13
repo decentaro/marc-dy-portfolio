@@ -7,6 +7,7 @@ export interface CADProject {
   title: string;
   description: string;
   images: string[];
+  hdImages: string[];
   category: string;
 }
 
@@ -44,7 +45,7 @@ const CADSection: React.FC<CADSectionProps> = ({
     setLightboxImage({
       ...lightboxImage,
       index: newIndex,
-      src: currentProject.images[newIndex]
+      src: currentProject.hdImages[newIndex]
     });
   }, [currentProject, lightboxImage, setLightboxImage]);
 
@@ -83,7 +84,7 @@ const CADSection: React.FC<CADSectionProps> = ({
                   <div 
                     className="w-full h-full cursor-pointer"
                     onClick={() => setLightboxImage({
-                      src: project.images[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0],
+                      src: project.hdImages[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0],
                       title: project.title,
                       index: selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0,
                       projectId: project.id
@@ -95,9 +96,9 @@ const CADSection: React.FC<CADSectionProps> = ({
                       width={400}
                       height={300}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      priority
-                      loading="eager"
-                      unoptimized={project.images[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0].includes('picsum.photos')}
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA"
                     />
                   </div>
                   
@@ -130,7 +131,7 @@ const CADSection: React.FC<CADSectionProps> = ({
                             width={64}
                             height={48}
                             className="w-full h-full object-cover"
-                            unoptimized={image.includes('picsum.photos')}
+                            loading="lazy"
                           />
                         </button>
                       ))}
@@ -199,8 +200,6 @@ const CADSection: React.FC<CADSectionProps> = ({
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
               onClick={() => setLightboxImage(null)}
               priority
-              loading="eager"
-              unoptimized={lightboxImage.src.includes('picsum.photos')}
             />
             
             {/* Navigation hint */}
