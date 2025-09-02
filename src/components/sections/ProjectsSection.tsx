@@ -16,7 +16,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   expandedProject,
   setExpandedProject
 }) => {
-  const filterOptions = ['All', 'Web Application', 'Discord Bot', 'Hardware'];
+  const filterOptions = ['All', 'Web Application', 'Desktop Application', 'CLI Tool', 'Discord Bot', 'Hardware'];
   
   const filteredProjects = selectedFilter === 'All' 
     ? projects 

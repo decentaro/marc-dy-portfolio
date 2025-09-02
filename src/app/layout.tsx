@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Marc Dy - Software Engineer Portfolio",
+  title: "Marc Dy - Software Developer Portfolio",
   description: "Full-stack developer passionate about building practical solutions. From trading card price trackers to Discord bots and IoT devices.",
   openGraph: {
-    title: "Marc Dy - Software Engineer Portfolio",
+    title: "Marc Dy - Software Developer Portfolio",
     description: "Full-stack developer passionate about building practical solutions. From trading card price trackers to Discord bots and IoT devices.",
     url: "https://marccarlody.com",
     siteName: "Marc Dy Portfolio",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Marc Dy - Software Engineer Portfolio",
+    title: "Marc Dy - Software Developer Portfolio",
     description: "Full-stack developer passionate about building practical solutions. From trading card price trackers to Discord bots and IoT devices.",
     images: ["https://marccarlody.com/icon.png"],
   },

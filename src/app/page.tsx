@@ -21,8 +21,8 @@ import { Project } from '../components/ui/ProjectCard';
 
 const user = {
   name: "Marc Dy",
-  title: "Software Engineer",
-  bio: "I build things for the web, for my games, and for fun. Currently turning creative ideas into functional code.",
+  title: "Software Developer",
+  bio: "I'm driven by the process of turning creative ideas into functional code. Whether it's developing a tool for a gaming community or building a full-fledged web application, I love bringing concepts to life through software.",
   // Email obfuscated - will be decoded client-side
   email: { encoded: "ZHltYXJjY2FybG9AeWFob28uY29t", domain: "yahoo.com" },
   social: {
@@ -33,6 +33,46 @@ const user = {
 };
 
 const projects: Project[] = [
+  {
+    id: 5,
+    title: "BMS POS System",
+    shortDesc: "Desktop POS & Inventory Management",
+    description: "A comprehensive, full-stack Point-of-Sale (POS) system with advanced inventory, sales, and employee management features, built with Electron and .NET 8.",
+    detailedDescription: "A robust, cross-platform desktop application designed for small businesses, offering a complete Point-of-Sale (POS) solution. Key features include real-time sales processing, detailed sales history with receipt reprint capabilities, and efficient returns management. It boasts both basic and advanced inventory management, handling expired and damaged goods. The system also includes comprehensive system and tax settings, audit trail logs for accountability, and full employee management functionalities, among many other advanced features. The frontend is built with React/Vite inside an Electron container, utilizing shadcn/ui for components. The backend is a powerful .NET 8 API connected to a Supabase (Postgres) database for all data management.",
+    technologies: ["Electron.js", "React", "Vite", ".NET 8", "C#", "Supabase", "PostgreSQL", "TailwindCSS"],
+    techStack: [
+      { name: "Electron.js", color: "gray" },
+      { name: "React", color: "cyan" },
+      { name: ".NET 8", color: "purple" },
+      { name: "Supabase", color: "green" },
+    ],
+    github: undefined,
+    demo: undefined,
+    image: "/api/placeholder/600/400",
+    status: "In Development",
+    type: "Desktop Application",
+    featured: true,
+    year: "2025-Present"
+  },
+  {
+    id: 6,
+    title: "portndock",
+    shortDesc: "Python CLI for managing local dev environments",
+    description: "A command-line tool to view active ports, manage Docker containers, and get a quick overview of your local development environment.",
+    detailedDescription: "A Python-based utility providing a Textual User Interface (TUI) to display currently used ports and running Docker containers. Allows for quick actions like stopping containers and refreshing the view, streamlining the local development workflow.",
+    technologies: ["Python", "CLI", "TUI", "Docker API", "Developer Tool"],
+    techStack: [
+      { name: "Python", color: "blue" },
+      { name: "CLI Tool", color: "gray" },
+    ],
+    github: "https://github.com/decentaro/portndock",
+    demo: "https://pypi.org/project/portndock/",
+    image: "/api/placeholder/600/400",
+    status: "Live",
+    type: "CLI Tool",
+    featured: true,
+    year: "2025-Present"
+  },
   {
     id: 1,
     title: "TCGNode",
@@ -55,7 +95,7 @@ const projects: Project[] = [
     type: "Web Application",
     featured: true,
     users: "20-50 active users",
-    year: "2024-Present"
+    year: "2025-Present"
   },
   {
     id: 3,
