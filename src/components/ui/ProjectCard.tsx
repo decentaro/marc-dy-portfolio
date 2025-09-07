@@ -310,7 +310,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 <div className="text-[8px] text-gray-700">
                   <span>Status: </span>
                   <span className="bg-green-500 text-white px-1 py-0.5 rounded text-[8px] group-hover:animate-pulse">Connected</span>
-                  <span className="ml-1">IP: 192.168.1.16</span>
+                  <span className="ml-1">IP: xxx.xxx.x.xx</span>
                 </div>
               </div>
               
