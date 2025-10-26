@@ -46,7 +46,7 @@ const projects: Project[] = [
       { name: ".NET 8", color: "purple" },
       { name: "Supabase", color: "green" },
     ],
-    github: undefined,
+    github: "https://github.com/decentaro/BMS-Point-of-Sale-System",
     demo: undefined,
     image: "/api/placeholder/600/400",
     status: "In Development",
