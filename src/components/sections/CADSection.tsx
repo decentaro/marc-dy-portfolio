@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useCallback, useRef, useEffect, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { useBalancedText } from '@/hooks/useBalancedText';
 
 export interface CADProject {
   id: number;
@@ -32,20 +31,7 @@ const CADSection: React.FC<CADSectionProps> = ({
 }) => {
   const currentProject = lightboxImage ? cadProjects.find(p => p.title === lightboxImage.title) : null;
 
-  // Track container width for Pretext balanced text
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([e]) => setContainerWidth(e.contentRect.width));
-    ro.observe(el);
-    setContainerWidth(el.offsetWidth);
-    return () => ro.disconnect();
-  }, []);
-
-  // Pretext: find balanced max-width for each CAD description (no orphan words)
-  const balancedWidths = useBalancedText(cadProjects.map(p => p.description), containerWidth);
 
   // Create intersection observers for each project
   const observer1 = useIntersectionObserver({ threshold: 0.1, rootMargin: '100px', triggerOnce: true });
@@ -93,37 +79,44 @@ const CADSection: React.FC<CADSectionProps> = ({
 
   return (
     <>
-      <section id="cad" className="py-20 px-4 border-t border-slate-700/40 min-h-screen" style={{ background: '#111827' }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">CAD Projects</h2>
-            <p className="text-gray-300 text-xl">3D Design & Engineering</p>
+      <section id="cad" className="py-24 px-4 border-t border-slate-700/40 min-h-screen" style={{ background: '#0f172a' }}>
+        <div className="max-w-5xl mx-auto">
+
+          {/* Header — left aligned like contact */}
+          <div className="mb-16">
+            <p className="text-cyan-400 font-mono text-sm mb-3 tracking-widest uppercase">CAD</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">3D Design & Engineering</h2>
+            <p className="text-slate-400 text-lg">Custom enclosures and mechanical parts designed in Fusion 360.</p>
           </div>
 
-          <div ref={containerRef} className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+          <div ref={containerRef} className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
             {cadProjects.map((project, index) => {
               const { targetRef, shouldLoad } = observers[index];
-              
+              const activeIndex = selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0;
+
               return (
-              <div key={project.id} ref={targetRef} className="bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-300 group border border-slate-700">
-                {/* Main CAD Image with Lightbox */}
-                <div className="relative h-48 bg-linear-to-r from-gray-800 to-gray-700 overflow-hidden">
-                  <div 
-                    className="w-full h-full cursor-pointer"
+                <div
+                  key={project.id}
+                  ref={targetRef}
+                  className="group flex flex-col bg-slate-900 rounded-2xl overflow-hidden border border-slate-700/60 hover:border-cyan-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/5"
+                >
+                  {/* Image area */}
+                  <div
+                    className="relative h-56 overflow-hidden cursor-pointer bg-slate-800"
                     onClick={() => setLightboxImage({
-                      src: project.hdImages[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0],
+                      src: project.hdImages[activeIndex],
                       title: project.title,
-                      index: selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0,
+                      index: activeIndex,
                       projectId: project.id
                     })}
                   >
                     {shouldLoad ? (
                       <Image
-                        src={project.images[selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0]}
+                        src={project.images[activeIndex]}
                         alt={project.title}
                         width={400}
                         height={300}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                         placeholder="blur"
                         blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VLIAAAA"
@@ -131,68 +124,67 @@ const CADSection: React.FC<CADSectionProps> = ({
                         quality={85}
                       />
                     ) : (
-                      <div className="w-full h-full bg-linear-to-r from-gray-800 to-gray-700 flex items-center justify-center">
-                        <div className="text-white text-center">
-                          <div className="text-4xl mb-2">🎨</div>
-                          <p className="text-sm font-semibold">{project.title}</p>
-                        </div>
+                      <div className="w-full h-full flex items-center justify-center bg-slate-800">
+                        <span className="text-slate-600 text-sm font-mono">{project.title}</span>
+                      </div>
+                    )}
+
+                    {/* Expand hint on hover */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs font-mono bg-black/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
+                        click to expand
+                      </span>
+                    </div>
+
+                    {/* Thumbnail strip — overlaid at bottom of image */}
+                    {project.images.length > 1 && shouldLoad && (
+                      <div className="absolute bottom-0 left-0 right-0 flex gap-1.5 px-3 pb-3 pt-8 bg-linear-to-t from-black/70 to-transparent">
+                        {project.images.map((image, i) => (
+                          <button
+                            key={i}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCADImage({ projectId: project.id, imageIndex: i });
+                            }}
+                            className={`relative w-10 h-8 rounded overflow-hidden border transition-all duration-200 shrink-0 ${
+                              activeIndex === i
+                                ? 'border-cyan-400 opacity-100 scale-105'
+                                : 'border-white/20 opacity-60 hover:opacity-100'
+                            }`}
+                          >
+                            <Image
+                              src={image}
+                              alt={`${project.title} ${i + 1}`}
+                              width={40}
+                              height={32}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                              sizes="40px"
+                              quality={60}
+                            />
+                          </button>
+                        ))}
                       </div>
                     )}
                   </div>
-                  
-                  {/* Hidden overlay for fallback */}
-                  <div className="absolute inset-0 bg-linear-to-r from-gray-800 to-gray-700 flex items-center justify-center" style={{ display: 'none' }}>
-                    <div className="text-white text-center">
-                      <div className="text-6xl mb-2">🎨</div>
-                      <p className="text-lg font-semibold">{project.title}</p>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Image Thumbnails */}
-                {project.images.length > 1 && shouldLoad && (
-                  <div className="px-4 py-3 bg-gray-800/50">
-                    <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-                      {project.images.map((image, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setSelectedCADImage({ projectId: project.id, imageIndex: index })}
-                          className={`relative w-16 h-12 rounded-md overflow-hidden border-2 transition-all ${
-                            selectedCADImage.projectId === project.id && selectedCADImage.imageIndex === index
-                              ? 'border-cyan-400 opacity-100'
-                              : 'border-gray-500 opacity-70 hover:opacity-100 hover:border-gray-400'
-                          }`}
-                        >
-                          <Image
-                            src={image}
-                            alt={`${project.title} thumbnail ${index + 1}`}
-                            width={64}
-                            height={48}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                            sizes="64px"
-                            quality={75}
-                          />
-                        </button>
-                      ))}
+                  {/* Info */}
+                  <div className="p-5 flex flex-col gap-3 flex-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-base font-semibold text-white leading-snug">{project.title}</h3>
+                      <span className="shrink-0 text-[10px] font-mono text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded-full">
+                        {project.category}
+                      </span>
                     </div>
-                  </div>
-                )}
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-300 mb-4" style={{ maxWidth: balancedWidths[index] > 0 ? `${balancedWidths[index]}px` : undefined }}>{project.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
-                      {project.category}
-                    </span>
-                    <span className="text-gray-400 text-sm">
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                    <p className="text-slate-600 text-xs font-mono mt-auto">
                       {project.images.length} image{project.images.length !== 1 ? 's' : ''}
-                    </span>
+                    </p>
                   </div>
                 </div>
-              </div>
-            );
+              );
             })}
           </div>
         </div>

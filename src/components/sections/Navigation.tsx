@@ -1,7 +1,6 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface NavigationProps {
@@ -17,6 +16,19 @@ const Navigation: React.FC<NavigationProps> = ({
   isMenuOpen,
   setIsMenuOpen
 }) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrolled = doc.scrollTop || document.body.scrollTop;
+      const total = doc.scrollHeight - doc.clientHeight;
+      setScrollProgress(total > 0 ? (scrolled / total) * 100 : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'projects', label: 'Projects' },
@@ -25,32 +37,11 @@ const Navigation: React.FC<NavigationProps> = ({
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-700/40 bg-slate-900/75 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-700/40 bg-slate-900/75 backdrop-blur-md overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-center h-16 relative">
 
-          {/* Logo + name */}
-          <a
-            href="#home"
-            onClick={() => setActiveSection('home')}
-            className="flex items-center gap-3 group"
-          >
-            <Image
-              src="/icon-optimized.png"
-              alt="Marc Dy Logo"
-              width={32}
-              height={32}
-              className="rounded-md opacity-90 group-hover:opacity-100 transition-opacity"
-              priority
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyKKhzQUKpyqANwCBGVFt6AtQJBTWCtEYHHKGWAKCZdHzJXy/wDqpqj/9k="
-            />
-            <span className="text-white font-semibold text-sm tracking-wide group-hover:text-cyan-400 transition-colors">
-              Marc Dy
-            </span>
-          </a>
-
-          {/* Desktop nav */}
+          {/* Desktop nav — centered */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <a
@@ -71,14 +62,22 @@ const Navigation: React.FC<NavigationProps> = ({
             ))}
           </div>
 
-          {/* Mobile toggle */}
+          {/* Mobile toggle — absolute right */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-slate-400 hover:text-white p-2 transition-colors"
+            className="md:hidden absolute right-0 text-slate-400 hover:text-white p-2 transition-colors"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
+      </div>
+
+      {/* Scroll progress bar */}
+      <div className="absolute bottom-0 left-0 h-px bg-slate-700/40 w-full">
+        <div
+          className="h-full bg-cyan-400 transition-all duration-75"
+          style={{ width: `${scrollProgress}%` }}
+        />
       </div>
 
       {/* Mobile menu */}

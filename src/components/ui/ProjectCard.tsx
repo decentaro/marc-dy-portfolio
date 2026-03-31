@@ -49,7 +49,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <div className="h-full bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-500 group relative hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/30">
+    <div className="h-full bg-slate-900 rounded-2xl overflow-hidden transition-all duration-300 group relative hover:shadow-xl hover:shadow-cyan-500/5 border border-slate-700/60 hover:border-cyan-500/30">
       {/* Enhanced Project Image */}
       <div className="relative h-48 flex items-center justify-center overflow-hidden transition-all duration-500">
         
@@ -594,7 +594,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2 mb-3">
           {project.techStack.map((tech, i) => (
-            <span key={i} className="px-2 py-1 bg-blue-600 text-white text-xs rounded-full">
+            <span key={i} className="px-2 py-0.5 text-xs font-mono text-cyan-400 border border-cyan-500/30 rounded-full">
               {tech.name}
             </span>
           ))}
@@ -607,7 +607,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               href={project.demo} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all hover:scale-105 transform flex items-center gap-2 shadow-lg"
+              className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20"
             >
               <Eye size={16} />
               {project.id === 1 ? 'Visit Live Site' : 'Live Demo'}
@@ -618,7 +618,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               href={project.github} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm transition-all hover:scale-105 transform flex items-center gap-2 shadow-lg"
+              className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition-all flex items-center gap-2 border border-slate-600"
             >
               <GitBranch size={16} />
               Code

@@ -74,7 +74,7 @@ export default function HeroSection({ user, skills }: HeroSectionProps) {
   }, [displayed, typing, cycleIndex]);
 
   return (
-    <section id="home" className="min-h-screen flex flex-col items-center justify-center pt-16">
+    <section id="home" className="min-h-screen flex flex-col items-center justify-center pt-24">
       <div className="max-w-5xl mx-auto w-full px-6 lg:px-8 flex flex-col">
 
         {/* Canvas — tightly sized to content */}

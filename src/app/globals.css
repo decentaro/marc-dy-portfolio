@@ -105,6 +105,11 @@
   body {
     background: #0f172a;
     color: white;
+    cursor: crosshair;
+  }
+
+  a, button, [role="button"], input, textarea, select, label {
+    cursor: crosshair;
   }
 }
 
