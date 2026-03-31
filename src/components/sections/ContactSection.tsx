@@ -63,7 +63,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-20 px-4 bg-black/20">
+    <section id="contact" className="py-20 px-4 bg-slate-900">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Get In Touch</h2>
@@ -71,7 +71,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
             <h3 className="text-xl font-bold text-white mb-6">Send a Message</h3>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <input
@@ -121,7 +121,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
             </form>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
             <h3 className="text-xl font-bold text-white mb-6">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">

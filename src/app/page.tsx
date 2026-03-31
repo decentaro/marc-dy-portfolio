@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 // Components
 import Navigation from '../components/sections/Navigation';
 import HeroSection from '../components/sections/HeroSection';
-import AboutSection from '../components/sections/AboutSection';
 import ProjectsSection from '../components/sections/ProjectsSection';
 import CADSection, { CADProject } from '../components/sections/CADSection';
 import ContactSection from '../components/sections/ContactSection';
@@ -258,10 +257,7 @@ export default function Portfolio() {
       />
 
       {/* Hero Section */}
-      <HeroSection user={user} />
-
-      {/* About Section */}
-      <AboutSection skills={skills} />
+      <HeroSection user={user} skills={skills} />
 
       {/* Projects Section */}
       <ProjectsSection

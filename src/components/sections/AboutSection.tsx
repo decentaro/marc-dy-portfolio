@@ -11,7 +11,7 @@ interface AboutSectionProps {
 
 const AboutSection: React.FC<AboutSectionProps> = ({ skills }) => {
   return (
-    <section id="about" className="py-20 px-4 bg-gray-900/30 relative overflow-hidden">
+    <section id="about" className="py-20 px-4 bg-slate-800/50 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative">
         <div className="grid lg:grid-cols-3 gap-12 items-start">
           {/* About Me Content */}
@@ -22,19 +22,19 @@ const AboutSection: React.FC<AboutSectionProps> = ({ skills }) => {
             </div>
             
             <div className="space-y-6">
-              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+              <div className="bg-slate-700/50 p-6 rounded-xl border border-slate-600/50 hover:bg-slate-700/80 transition-all duration-300">
                 <h3 className="text-xl font-semibold text-white mb-2">My Journey</h3>
                 <p className="text-gray-300 leading-relaxed">
                   I&apos;m a driven software developer who enjoys developing new solutions. I have experience developing and deploying apps that currently serve dozens of people and I enjoy the challenge of transforming a complicated problem into a simple, elegant piece of program.
                 </p>
               </div>
-              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+              <div className="bg-slate-700/50 p-6 rounded-xl border border-slate-600/50 hover:bg-slate-700/80 transition-all duration-300">
                 <h3 className="text-xl font-semibold text-white mb-2">What Drives Me</h3>
                 <p className="text-gray-300 leading-relaxed">
                   I specialize in full-stack development and enjoy working on projects that challenge me to learn and grow. When I&apos;m not coding, you&apos;ll find me gaming or tinkering with new technologies. This passion for gaming often inspires my personal projects, leading me to create practical tools for my community.
                 </p>
               </div>
-              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+              <div className="bg-slate-700/50 p-6 rounded-xl border border-slate-600/50 hover:bg-slate-700/80 transition-all duration-300">
                 <h3 className="text-xl font-semibold text-white mb-2">Long-term Vision</h3>
                 <p className="text-gray-300 leading-relaxed">
                   Ultimately, I enjoy the process of bringing ideas to life, whether for a professional application or a unique vision. My goal is to keep honing my skills on challenging projects, with the long-term dream of one day building software that can support causes I&apos;m passionate about, like animal welfare.
@@ -72,7 +72,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ skills }) => {
             
             <div className="space-y-4">
               {skills.map((skillGroup, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                <div key={index} className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50 hover:bg-slate-700/80 transition-all duration-300 hover:scale-105">
                   <h4 className="text-white font-semibold mb-3">
                     {skillGroup.category}
                   </h4>

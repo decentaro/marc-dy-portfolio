@@ -76,7 +76,7 @@ const CADSection: React.FC<CADSectionProps> = ({
 
   return (
     <>
-      <section id="cad" className="py-20 px-4 bg-gray-900/30">
+      <section id="cad" className="py-20 px-4 bg-slate-800/50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">CAD Projects</h2>
@@ -88,7 +88,7 @@ const CADSection: React.FC<CADSectionProps> = ({
               const { targetRef, shouldLoad } = observers[index];
               
               return (
-              <div key={project.id} ref={targetRef} className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/15 transition-all duration-300 group">
+              <div key={project.id} ref={targetRef} className="bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-300 group border border-slate-700">
                 {/* Main CAD Image with Lightbox */}
                 <div className="relative h-48 bg-gradient-to-r from-gray-800 to-gray-700 overflow-hidden">
                   <div 

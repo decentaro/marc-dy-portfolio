@@ -45,7 +45,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/20 transition-all duration-500 group relative hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 border border-transparent hover:border-cyan-500/30">
+    <div className="bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-500 group relative hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/30">
       {/* Enhanced Project Image */}
       <div className="relative h-48 flex items-center justify-center overflow-hidden transition-all duration-500">
         
