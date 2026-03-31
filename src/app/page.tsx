@@ -225,7 +225,7 @@ const skills = [
   { category: "Backend", items: [".NET", "NestJS", "FastAPI", "Django", "REST APIs"] },
   { category: "Cloud/Database", items: ["AWS (Lambda, EC2, RDS, SageMaker, DynamoDB)", "Supabase", "PostgreSQL", "MongoDB", "SQLite"] },
   { category: "Tools", items: ["Git", "GitHub", "Docker", "Vercel", "VS Code", "Jira", "Confluence", "Linux", "Arduino", "Raspberry Pi"] },
-  { category: "AI / LLM", items: ["Hugging Face", "LoRA Fine-tuning", "vLLM", "TurboQuant", "Qwen", "Llama", "RAG", "Agents", "Domain Adaptation"] }
+  { category: "AI / LLM", items: ["Hugging Face", "LoRA Fine-tuning", "vLLM", "TurboQuant", "Local LLM", "RAG", "Agents", "Domain Adaptation"] }
 ];
 
 export default function Portfolio() {
