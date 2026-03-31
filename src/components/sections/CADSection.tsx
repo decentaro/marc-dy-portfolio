@@ -89,7 +89,7 @@ const CADSection: React.FC<CADSectionProps> = ({
             <p className="text-slate-400 text-lg">Custom enclosures and mechanical parts designed in Fusion 360.</p>
           </div>
 
-          <div ref={containerRef} className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+          <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {cadProjects.map((project, index) => {
               const { targetRef, shouldLoad } = observers[index];
               const activeIndex = selectedCADImage.projectId === project.id ? selectedCADImage.imageIndex : 0;

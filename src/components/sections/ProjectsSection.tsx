@@ -83,7 +83,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         {/* Grid — row by row, each card in a row gets the same Pretext-measured height */}
         <div ref={containerRef} className="flex flex-col gap-8">
           {rows.map((row, ri) => (
-            <div key={ri} className="flex gap-8">
+            <div key={ri} className="flex flex-col sm:flex-row gap-8">
               {row.projects.map((project) => (
                 <div
                   key={project.id}
