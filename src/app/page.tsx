@@ -220,11 +220,12 @@ const cadProjects: CADProject[] = [
 ];
 
 const skills = [
-  { category: "Languages", items: ["Python", "JavaScript", "TypeScript", "C/C++", "SQL", "HTML/CSS"] },
+  { category: "Languages", items: ["Python", "JavaScript", "TypeScript", "C#", "C/C++", "SQL", "HTML/CSS"] },
   { category: "Frontend", items: ["React", "Next.js", "TailwindCSS", "Bootstrap", "shadcn/ui"] },
-  { category: "Backend", items: ["NestJS", "FastAPI", "Django", "REST APIs"] },
-  { category: "Cloud/Database", items: ["AWS (Lambda, EC2, RDS, SageMaker, DynamoDB)", "PostgreSQL", "MongoDB", "SQLite"] },
-  { category: "Tools", items: ["Git", "GitHub", "Docker", "VS Code", "Jira", "Confluence", "Linux", "Arduino", "Raspberry Pi"] }
+  { category: "Backend", items: [".NET", "NestJS", "FastAPI", "Django", "REST APIs"] },
+  { category: "Cloud/Database", items: ["AWS (Lambda, EC2, RDS, SageMaker, DynamoDB)", "Supabase", "PostgreSQL", "MongoDB", "SQLite"] },
+  { category: "Tools", items: ["Git", "GitHub", "Docker", "Vercel", "VS Code", "Jira", "Confluence", "Linux", "Arduino", "Raspberry Pi"] },
+  { category: "AI / LLM", items: ["Hugging Face", "LoRA Fine-tuning", "vLLM", "TurboQuant", "Qwen", "Llama", "RAG", "Agents", "Domain Adaptation"] }
 ];
 
 export default function Portfolio() {

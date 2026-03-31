@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Mail } from 'lucide-react';
+import { GitBranch, Mail } from 'lucide-react';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
 interface ContactSectionProps {
@@ -63,7 +63,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-20 px-4 bg-slate-900">
+    <section id="contact" className="py-20 px-4 border-t border-slate-700/40 min-h-screen" style={{ background: '#0f172a' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Get In Touch</h2>
@@ -79,28 +79,28 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 name="name"
                 placeholder="Your Name"
                 required
-                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-500"
               />
               <input
                 type="email"
                 name="email"
                 placeholder="Your Email"
                 required
-                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-500"
               />
               <input
                 type="text"
                 name="subject"
                 placeholder="Subject"
                 required
-                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-500"
               />
               <textarea
                 name="message"
                 rows={4}
                 placeholder="Your Message"
                 required
-                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 resize-none"
+                className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:border-blue-500 resize-none"
               ></textarea>
               
               {/* Honeypot field - hidden from users, visible to bots */}
@@ -140,7 +140,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <Github className="text-blue-400" size={20} />
+                <GitBranch className="text-blue-400" size={20} />
                 <div>
                   <p className="text-gray-400 text-sm">GitHub</p>
                   <a 

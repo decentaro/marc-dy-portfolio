@@ -39,7 +39,7 @@ const CANVAS_TEXT =
   "Gaming is where the ideas come from. Hardware is where they get real. " +
   "I like problems that are hard enough to be interesting and useful enough to matter. " +
   "Long-term: software that supports causes worth caring about. Animal welfare, specifically. " +
-  "For now: shipping things, learning fast, and making the tools I'd actually want to use.";
+  "For now: shipping things and learning fast.";
 
 export default function HeroSection({ user, skills }: HeroSectionProps) {
   const [cycleIndex, setCycleIndex] = useState(0);
@@ -84,9 +84,9 @@ export default function HeroSection({ user, skills }: HeroSectionProps) {
           </Suspense>
         </div>
 
-        {/* Typewriter + status + CTA — all on one row, no gap */}
-        <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
-          <div className="font-mono flex items-center gap-0">
+        {/* Typewriter + CTA */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="font-mono flex items-center">
             <span className="text-cyan-400 text-sm select-none">&gt; </span>
             <span className="text-cyan-300 text-sm font-semibold ml-1">building:</span>
             <span className="text-white text-sm font-medium ml-2">{displayed}</span>
@@ -95,35 +95,26 @@ export default function HeroSection({ user, skills }: HeroSectionProps) {
               style={{ opacity: cursorOn ? 1 : 0, transition: "opacity 0.1s" }}
             />
           </div>
-          <div className="sm:ml-auto flex items-center gap-5">
-            <span className="text-xs text-slate-600 font-mono select-none hidden sm:flex items-center gap-3">
-              <span>6 projects</span>
-              <span className="text-slate-700">·</span>
-              <span>50+ users</span>
-              <span className="text-slate-700">·</span>
-              <span className="text-green-600">● live</span>
-            </span>
-            <a href="#projects">
-              <Button size="lg" variant="light">
-                View My Work <ArrowRight className="inline-block ml-2" size={18} />
-              </Button>
-            </a>
-          </div>
+          <a href="#projects" className="sm:ml-auto">
+            <Button size="lg" className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold shadow-lg shadow-cyan-500/20">
+              View My Work <ArrowRight size={18} />
+            </Button>
+          </a>
         </div>
 
-        {/* Skills strip — right below, separated by a thin line */}
+        {/* Skills grid */}
         <div className="mt-6 pt-6 border-t border-slate-700/50">
-          <div className="flex flex-wrap gap-x-8 gap-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-5">
             {skills.map((group) => (
-              <div key={group.category} className="flex flex-col gap-1.5">
+              <div key={group.category} className="flex flex-col gap-2">
                 <span className="text-[10px] text-slate-500 font-mono uppercase tracking-widest">
                   {group.category}
                 </span>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-col gap-1">
                   {group.items.map((skill) => (
                     <span
                       key={skill}
-                      className="text-xs text-slate-400 bg-slate-800/80 border border-slate-700/60 px-2 py-0.5 rounded"
+                      className="text-xs text-slate-400 leading-snug"
                     >
                       {skill}
                     </span>

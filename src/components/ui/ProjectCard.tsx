@@ -1,5 +1,7 @@
-import React from 'react';
-import { Github, Eye } from 'lucide-react';
+"use client";
+
+import React, { useState } from 'react';
+import { GitBranch, Eye } from 'lucide-react';
 
 interface TechStack {
   name: string;
@@ -33,8 +35,10 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   expandedProject,
-  setExpandedProject
+  setExpandedProject,
 }) => {
+  const isExpanded = expandedProject === project.id;
+
   const getStatusColor = (status: string) => {
     switch(status) {
       case 'Live': return 'bg-green-500';
@@ -45,14 +49,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-500 group relative hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/30">
+    <div className="h-full bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-500 group relative hover:scale-[1.02] hover:shadow-2xl hover:shadow-cyan-500/20 border border-slate-700 hover:border-cyan-500/30">
       {/* Enhanced Project Image */}
       <div className="relative h-48 flex items-center justify-center overflow-hidden transition-all duration-500">
         
         {/* Creative Backgrounds */}
         {project.id === 1 && (
           // TCGNode Website Background - Green Gradient
-          <div className="absolute inset-0 bg-gradient-to-br from-green-800 via-green-900 to-emerald-900 overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-br from-green-800 via-green-900 to-emerald-900 overflow-hidden">
             {/* Subtle pattern effects */}
             <div className="absolute top-4 left-4 w-2 h-2 bg-green-400 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute top-8 right-6 w-1 h-1 bg-green-300 rounded-full opacity-30 animate-pulse delay-200"></div>
@@ -68,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         
         {project.id === 2 && (
           // Gaming Fantasy Forest Background
-          <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-emerald-900 to-teal-900">
+          <div className="absolute inset-0 bg-linear-to-br from-green-900 via-emerald-900 to-teal-900">
             {/* Trees silhouettes */}
             <div className="absolute bottom-0 left-2 w-3 h-16 bg-green-800 opacity-40 rounded-t-full"></div>
             <div className="absolute bottom-0 left-6 w-4 h-20 bg-green-700 opacity-50 rounded-t-full"></div>
@@ -87,7 +91,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         
         {project.id === 3 && (
           // IoT Hardware Project Background
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-slate-900 to-blue-900 overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-br from-gray-800 via-slate-900 to-blue-900 overflow-hidden">
             {/* Circuit board traces */}
             <div className="absolute top-4 left-8 w-12 h-0.5 bg-green-400 opacity-30 group-hover:opacity-60 transition-opacity"></div>
             <div className="absolute top-8 left-4 w-0.5 h-8 bg-blue-400 opacity-25 group-hover:opacity-50 transition-opacity"></div>
@@ -110,23 +114,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         
         {project.id === 4 && (
           // Corporate Data Center Background
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-blue-900"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-gray-900 to-blue-900"></div>
         )}
 
         {project.id === 5 && (
           // POS System / Business Dashboard Background
-          <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-teal-900 to-blue-900"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-green-900 via-teal-900 to-blue-900"></div>
         )}
 
         {project.id === 6 && (
           // Developer Tool / Terminal Background with Matrix Rain Effect
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-indigo-900 overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-br from-gray-900 via-slate-900 to-indigo-900 overflow-hidden">
             {/* Matrix-style falling code */}
-            <div className="absolute top-0 left-4 w-0.5 h-full bg-gradient-to-b from-green-400 to-transparent opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
-            <div className="absolute top-0 left-8 w-0.5 h-full bg-gradient-to-b from-cyan-400 to-transparent opacity-20 group-hover:opacity-50 transition-opacity duration-500 animation-delay-100"></div>
-            <div className="absolute top-0 left-12 w-0.5 h-full bg-gradient-to-b from-blue-400 to-transparent opacity-25 group-hover:opacity-55 transition-opacity duration-500 animation-delay-200"></div>
-            <div className="absolute top-0 right-8 w-0.5 h-full bg-gradient-to-b from-purple-400 to-transparent opacity-20 group-hover:opacity-45 transition-opacity duration-500 animation-delay-300"></div>
-            <div className="absolute top-0 right-12 w-0.5 h-full bg-gradient-to-b from-indigo-400 to-transparent opacity-30 group-hover:opacity-60 transition-opacity duration-500 animation-delay-400"></div>
+            <div className="absolute top-0 left-4 w-0.5 h-full bg-linear-to-b from-green-400 to-transparent opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
+            <div className="absolute top-0 left-8 w-0.5 h-full bg-linear-to-b from-cyan-400 to-transparent opacity-20 group-hover:opacity-50 transition-opacity duration-500 animation-delay-100"></div>
+            <div className="absolute top-0 left-12 w-0.5 h-full bg-linear-to-b from-blue-400 to-transparent opacity-25 group-hover:opacity-55 transition-opacity duration-500 animation-delay-200"></div>
+            <div className="absolute top-0 right-8 w-0.5 h-full bg-linear-to-b from-purple-400 to-transparent opacity-20 group-hover:opacity-45 transition-opacity duration-500 animation-delay-300"></div>
+            <div className="absolute top-0 right-12 w-0.5 h-full bg-linear-to-b from-indigo-400 to-transparent opacity-30 group-hover:opacity-60 transition-opacity duration-500 animation-delay-400"></div>
             
             {/* Floating terminal symbols */}
             <div className="absolute top-4 left-6 text-green-300 opacity-20 group-hover:opacity-40 transition-opacity duration-500 font-mono text-xs animate-pulse">$</div>
@@ -145,7 +149,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {project.id === 1 && (
           <div className="relative w-full h-full p-3 opacity-40 group-hover:opacity-95 transition-all duration-500">
             {/* TCGNode Search Interface Recreation */}
-            <div className="w-full h-full bg-gradient-to-b from-yellow-300 to-yellow-400 rounded-lg shadow-2xl border-2 border-yellow-500 p-2 transform group-hover:scale-105 transition-all duration-500">
+            <div className="w-full h-full bg-linear-to-b from-yellow-300 to-yellow-400 rounded-lg shadow-2xl border-2 border-yellow-500 p-2 transform group-hover:scale-105 transition-all duration-500">
               
               {/* Header */}
               <div className="text-center mb-2">
@@ -575,8 +579,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Project Description */}
-        <p className="text-gray-300 mb-4 text-sm leading-relaxed">
-          {expandedProject === project.id ? project.detailedDescription : project.description}
+        <p className="text-gray-300 text-sm leading-relaxed mb-4">
+          {isExpanded ? project.detailedDescription : project.description}
         </p>
         
         {/* Expand/Collapse Button */}
@@ -616,7 +620,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               rel="noopener noreferrer"
               className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm transition-all hover:scale-105 transform flex items-center gap-2 shadow-lg"
             >
-              <Github size={16} />
+              <GitBranch size={16} />
               Code
             </a>
           )}

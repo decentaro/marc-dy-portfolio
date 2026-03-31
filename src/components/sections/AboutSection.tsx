@@ -18,7 +18,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ skills }) => {
           <div className="lg:col-span-2 space-y-8">
             <div className="mb-8">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">About Me</h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mb-8"></div>
+              <div className="w-24 h-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-full mb-8"></div>
             </div>
             
             <div className="space-y-6">
@@ -43,19 +43,19 @@ const AboutSection: React.FC<AboutSectionProps> = ({ skills }) => {
               
               {/* Quick Stats */}
               <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                <div className="text-center p-4 bg-gradient-to-br from-blue-500/20 to-cyan-600/20 rounded-xl border border-blue-500/30">
+                <div className="text-center p-4 bg-linear-to-br from-blue-500/20 to-cyan-600/20 rounded-xl border border-blue-500/30">
                   <div className="text-2xl font-bold text-blue-400 mb-1">4+</div>
                   <div className="text-xs text-gray-300">Projects</div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-green-500/20 to-emerald-600/20 rounded-xl border border-green-500/30">
+                <div className="text-center p-4 bg-linear-to-br from-green-500/20 to-emerald-600/20 rounded-xl border border-green-500/30">
                   <div className="text-2xl font-bold text-green-400 mb-1">2+</div>
                   <div className="text-xs text-gray-300">Live Apps</div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-purple-500/20 to-indigo-600/20 rounded-xl border border-purple-500/30">
+                <div className="text-center p-4 bg-linear-to-br from-purple-500/20 to-indigo-600/20 rounded-xl border border-purple-500/30">
                   <div className="text-2xl font-bold text-purple-400 mb-1">50+</div>
                   <div className="text-xs text-gray-300">Active Users</div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-yellow-500/20 to-orange-600/20 rounded-xl border border-yellow-500/30">
+                <div className="text-center p-4 bg-linear-to-br from-yellow-500/20 to-orange-600/20 rounded-xl border border-yellow-500/30">
                   <div className="text-2xl font-bold text-yellow-400 mb-1">3+</div>
                   <div className="text-xs text-gray-300">Years Coding</div>
                 </div>
@@ -67,7 +67,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ skills }) => {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-white mb-4">Tech Stack</h3>
-              <div className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+              <div className="w-16 h-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-full"></div>
             </div>
             
             <div className="space-y-4">

@@ -1,7 +1,10 @@
-import React, { useCallback } from 'react';
+"use client";
+
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { useBalancedText } from '@/hooks/useBalancedText';
 
 export interface CADProject {
   id: number;
@@ -27,9 +30,23 @@ const CADSection: React.FC<CADSectionProps> = ({
   lightboxImage,
   setLightboxImage
 }) => {
-  // Find current project for lightbox navigation
   const currentProject = lightboxImage ? cadProjects.find(p => p.title === lightboxImage.title) : null;
-  
+
+  // Track container width for Pretext balanced text
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setContainerWidth(e.contentRect.width));
+    ro.observe(el);
+    setContainerWidth(el.offsetWidth);
+    return () => ro.disconnect();
+  }, []);
+
+  // Pretext: find balanced max-width for each CAD description (no orphan words)
+  const balancedWidths = useBalancedText(cadProjects.map(p => p.description), containerWidth);
+
   // Create intersection observers for each project
   const observer1 = useIntersectionObserver({ threshold: 0.1, rootMargin: '100px', triggerOnce: true });
   const observer2 = useIntersectionObserver({ threshold: 0.1, rootMargin: '100px', triggerOnce: true });
@@ -76,21 +93,21 @@ const CADSection: React.FC<CADSectionProps> = ({
 
   return (
     <>
-      <section id="cad" className="py-20 px-4 bg-slate-800/50">
+      <section id="cad" className="py-20 px-4 border-t border-slate-700/40 min-h-screen" style={{ background: '#111827' }}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">CAD Projects</h2>
             <p className="text-gray-300 text-xl">3D Design & Engineering</p>
           </div>
 
-          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+          <div ref={containerRef} className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
             {cadProjects.map((project, index) => {
               const { targetRef, shouldLoad } = observers[index];
               
               return (
               <div key={project.id} ref={targetRef} className="bg-slate-800 rounded-xl overflow-hidden hover:bg-slate-700 transition-all duration-300 group border border-slate-700">
                 {/* Main CAD Image with Lightbox */}
-                <div className="relative h-48 bg-gradient-to-r from-gray-800 to-gray-700 overflow-hidden">
+                <div className="relative h-48 bg-linear-to-r from-gray-800 to-gray-700 overflow-hidden">
                   <div 
                     className="w-full h-full cursor-pointer"
                     onClick={() => setLightboxImage({
@@ -114,7 +131,7 @@ const CADSection: React.FC<CADSectionProps> = ({
                         quality={85}
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-r from-gray-800 to-gray-700 flex items-center justify-center">
+                      <div className="w-full h-full bg-linear-to-r from-gray-800 to-gray-700 flex items-center justify-center">
                         <div className="text-white text-center">
                           <div className="text-4xl mb-2">🎨</div>
                           <p className="text-sm font-semibold">{project.title}</p>
@@ -124,7 +141,7 @@ const CADSection: React.FC<CADSectionProps> = ({
                   </div>
                   
                   {/* Hidden overlay for fallback */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-700 flex items-center justify-center" style={{ display: 'none' }}>
+                  <div className="absolute inset-0 bg-linear-to-r from-gray-800 to-gray-700 flex items-center justify-center" style={{ display: 'none' }}>
                     <div className="text-white text-center">
                       <div className="text-6xl mb-2">🎨</div>
                       <p className="text-lg font-semibold">{project.title}</p>
@@ -164,7 +181,7 @@ const CADSection: React.FC<CADSectionProps> = ({
 
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
+                  <p className="text-gray-300 mb-4" style={{ maxWidth: balancedWidths[index] > 0 ? `${balancedWidths[index]}px` : undefined }}>{project.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
                       {project.category}
@@ -184,7 +201,7 @@ const CADSection: React.FC<CADSectionProps> = ({
       {/* CAD Lightbox Modal */}
       {lightboxImage && (
         <div 
-          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/90 backdrop-blur-xs flex items-center justify-center z-50 p-4"
           onClick={() => setLightboxImage(null)}
         >
           <div className="relative max-w-4xl max-h-full" onClick={(e) => e.stopPropagation()}>
@@ -229,7 +246,7 @@ const CADSection: React.FC<CADSectionProps> = ({
             />
             
             {/* Navigation hint */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white text-sm px-3 py-2 rounded-lg opacity-60">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-xs text-white text-sm px-3 py-2 rounded-lg opacity-60">
               {currentProject && currentProject.images.length > 1 
                 ? 'Use ← → keys or click arrows to navigate • Click anywhere to close'
                 : 'Click anywhere to close'

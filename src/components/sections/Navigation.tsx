@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
@@ -23,82 +25,86 @@ const Navigation: React.FC<NavigationProps> = ({
   ];
 
   return (
-    <nav className="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-700">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-700/40 bg-slate-900/75 backdrop-blur-md">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <a 
-              href="#home"
-              onClick={() => setActiveSection('home')}
-              className="flex items-center hover:opacity-80 transition-opacity"
-            >
-              <Image
-                src="/icon-optimized.png"
-                alt="Marc Dy Logo"
-                width={56}
-                height={56}
-                className="rounded-lg"
-                priority
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyKKhzQUKpyqANwCBGVFt6AtQJBTWCtEYHHKGWAKCZdHzJXy/wDqpqj/9k="
-              />
-            </a>
-          </div>
-          
-          {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-4">
+
+          {/* Logo + name */}
+          <a
+            href="#home"
+            onClick={() => setActiveSection('home')}
+            className="flex items-center gap-3 group"
+          >
+            <Image
+              src="/icon-optimized.png"
+              alt="Marc Dy Logo"
+              width={32}
+              height={32}
+              className="rounded-md opacity-90 group-hover:opacity-100 transition-opacity"
+              priority
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyKKhzQUKpyqANwCBGVFt6AtQJBTWCtEYHHKGWAKCZdHzJXy/wDqpqj/9k="
+            />
+            <span className="text-white font-semibold text-sm tracking-wide group-hover:text-cyan-400 transition-colors">
+              Marc Dy
+            </span>
+          </a>
+
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={() => setActiveSection(item.id)}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                  activeSection === item.id 
-                    ? 'bg-cyan-500 text-white shadow-lg' 
-                    : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                className={`relative px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
+                  activeSection === item.id
+                    ? 'text-cyan-400'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {item.label}
+                {activeSection === item.id && (
+                  <span className="absolute bottom-0 left-4 right-4 h-px bg-cyan-400 rounded-full" />
+                )}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-slate-400 hover:text-white p-2 transition-colors"
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-slate-700/40 bg-slate-900/95 backdrop-blur-md">
+          <div className="max-w-5xl mx-auto px-6 py-3 flex flex-col gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => {
+                  setActiveSection(item.id);
+                  setIsMenuOpen(false);
+                }}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  activeSection === item.id
+                    ? 'text-cyan-400 bg-cyan-400/5'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {item.label}
               </a>
             ))}
           </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white p-2"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
         </div>
-
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-2 bg-gray-900/90 backdrop-blur-md rounded-lg mt-2">
-              {navItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={() => {
-                    setActiveSection(item.id);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block px-3 py-2 rounded-lg transition-all duration-300 ${
-                    activeSection === item.id 
-                      ? 'bg-blue-600 text-white shadow-lg' 
-                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </nav>
   );
 };
