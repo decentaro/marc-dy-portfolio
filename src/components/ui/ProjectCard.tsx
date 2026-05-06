@@ -44,6 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       case 'Live': return 'bg-green-500';
       case 'In Development': return 'bg-yellow-500';
       case 'Completed': return 'bg-blue-500';
+      case 'Beta': return 'bg-orange-500';
       default: return 'bg-gray-500';
     }
   };
@@ -610,7 +611,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20"
             >
               <Eye size={16} />
-              {project.id === 1 ? 'Visit Live Site' : 'Live Demo'}
+              {(project.id === 1 || project.id === 5) ? 'Visit Live Site' : 'Live Demo'}
             </a>
           )}
           {project.github && (

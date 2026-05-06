@@ -46,9 +46,9 @@ const projects: Project[] = [
       { name: "Supabase", color: "green" },
     ],
     github: "https://github.com/decentaro/BMS-Point-of-Sale-System",
-    demo: undefined,
+    demo: "https://bms-pos.bmspos22.workers.dev/",
     image: "/api/placeholder/600/400",
-    status: "In Development",
+    status: "Beta",
     type: "Desktop Application",
     featured: true,
     year: "2025-Present"

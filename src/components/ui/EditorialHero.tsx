@@ -342,12 +342,40 @@ export default function EditorialHero({ name, bio }: EditorialHeroProps) {
     setDefaultPos(canvasRef.current!);
   }, [setDefaultPos]);
 
+  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const touch = e.touches[0];
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    const mx = touch.clientX - rect.left;
+    const my = touch.clientY - rect.top;
+    const W = canvas.width / dpr;
+    const H = canvas.height / dpr;
+    const { size, font } = getNameFont(W);
+    const ctx = canvas.getContext("2d")!;
+    ctx.font = font;
+    const nameW = ctx.measureText(name).width;
+    const nameH = size * 1.15;
+    nameTgt.current = {
+      x: Math.max(0, Math.min(W - nameW, mx - nameW / 2)),
+      y: Math.max(0, Math.min(H - nameH * 2.5, my - nameH / 2)),
+    };
+  }, [name]);
+
+  const handleTouchEnd = useCallback(() => {
+    setDefaultPos(canvasRef.current!);
+  }, [setDefaultPos]);
+
   return (
     <canvas
       ref={canvasRef}
       style={{ width: "100%", height: "100%", display: "block", cursor: "crosshair" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     />
   );
 }
